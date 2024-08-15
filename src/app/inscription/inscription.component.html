@@ -17,7 +17,7 @@
                 <div class="col-lg-12">
                     <div class="text-center mt-sm-5 mb-4 text-white-50">
                         <div>
-                            <a  class="d-inline-block auth-logo">
+                            <a class="d-inline-block auth-logo">
                                 <img src="assets/images/d.png" alt="" height="100">
                             </a>
                         </div>
@@ -32,42 +32,44 @@
                     
                         <div class="card-body p-4"> 
                             <div class="text-center mt-2">
-                                <h5 class="text-primary">Bienvenu sur SJM</h5>
-                            </div>
+                                <h5 class="text-primary">Créer Un Nouveau Compte</h5>
+                         </div>
                             <div class="p-2 mt-4">
-                                <form >
+                                <form class="needs-validation" novalidate action="https://themesbrand.com/velzon/html/default/index.html">
     
                                     <div class="mb-3">
-                                        <label for="useremail" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="useremail" placeholder="Entrez votre adresse email">
+                                        <label for="useremail" class="form-label">Email <span class="text-danger">*</span></label>
+                                        <input type="email" class="form-control" id="useremail" placeholder="Entrez votre adresse email" required>  
+                                        <div class="invalid-feedback">
+                                            Entrez Votre email
+                                        </div>      
                                     </div>
-
-                                    
-            
                                     <div class="mb-3">
-                                        <!--
-                                           <div class="float-end">
-                                            <a href="auth-pass-reset-basic.html" class="text-muted">Mot De Passe Oublié?</a>
-                                        </div>
-                                        
-                                        -->
-                                     
-                                        <label class="form-label" for="password-input">Mot De Passe</label>
-                                        <div class="position-relative auth-pass-inputgroup mb-3">
-                                            <input type="password" class="form-control pe-5" placeholder="Entrez le mot de passe" id="password-input">
-                                            <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
+                                        <label for="username" class="form-label">Nom <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="username" placeholder="Entrez Votre  Nom" required>
+                                        <div class="invalid-feedback">
+                                            Entrez votre Nom
                                         </div>
                                     </div>
-
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="auth-remember-check">
-                                        <label class="form-check-label" for="auth-remember-check">Se Souvenir</label>
+                                    
+                                    <div class="mb-2">
+                                        <label for="userpassword" class="form-label">Mot De Passe <span class="text-danger">*</span></label>
+                                        <input type="password" class="form-control" id="userpassword" placeholder="Entrez votre mot de passe" required>
+                                        <div class="invalid-feedback">
+                                            Entrez Le Mot De Passe
+                                        </div>       
                                     </div>
                                     
                                     <div class="mt-4">
-                                        <a   [routerLink]="'/dashboard'"  class="btn btn-success w-100 h-50" >Se Connecter</a>
+                                        <!-- <button class="btn btn-success w-100" type="submit">S'Inscrire</button> -->
+
+                                        <a  [routerLink]="'/connexion'"  class="btn btn-success w-100 h-50" >S'Inscrire</a>
+
                                     </div>
+
+                                    
                                 </form>
+
                             </div>
                         </div>
                         <!-- end card body -->
@@ -75,7 +77,7 @@
                     <!-- end card -->
 
                     <div class="mt-4 text-center">
-                        <p class="mb-0">Vous n'avez pas encore de compte? <a [routerLink]="'/inscription'" class="fw-semibold text-primary text-decoration-underline"> S'Inscrire </a> </p>
+                        <p class="mb-0">Avez-vous déjà un Compte? <a [routerLink]="'/connexion'" class="fw-semibold text-primary text-decoration-underline"> Se Connecter </a> </p>
                     </div>
 
                 </div>
@@ -100,10 +102,3 @@
     </footer>
     <!-- end Footer -->
 </div>
-  
-
-
-<!-- <p-toast></p-toast> -->
-
-
-
