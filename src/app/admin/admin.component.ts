@@ -4,12 +4,12 @@ import { HeaderActivityComponent } from '../header-activity/header-activity.comp
 import { FooterActivityComponent } from '../footer-activity/footer-activity.component';
 
 @Component({
-  selector: 'app-rubrique',
+  selector: 'app-admin',
   standalone: true,
   imports: [SidebarComponent, HeaderActivityComponent, FooterActivityComponent],
-  templateUrl: './rubrique.component.html',
-  styleUrl: './rubrique.component.css'
+  templateUrl: './admin.component.html',
+  styleUrl: './admin.component.css'
 })
-export class RubriqueComponent {
+export class AdminComponent {
 
 }

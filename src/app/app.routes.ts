@@ -11,12 +11,8 @@ import { SeanceComponent } from './seance/seance.component';
 export const routes: Routes = [
     {path: 'connexion', component : ConnexionComponent},
     {path: 'inscription', component : InscriptionComponent},
-    {path: 'dashboard', component : ActivityComponent},
-    {path: 'deconnexion', component : DeconnexionComponent},
-    {path: 'candidat', component : CandidatComponent},
-    {path: 'session', component : SessionComponent},
-    {path: 'rubrique', component : RubriqueComponent},
-    {path: 'seance', component : SeanceComponent},
+    {path: 'dashboard',loadChildren: () => import ('./admin/admin.module').then(m =>m.AdminModule)},
+    
 
 
 
