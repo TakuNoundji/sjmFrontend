@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
 
-  private baseUrl = 'http://localhost:8086/api/sjm/session'
+  private baseUrl = `${environment.api}session`;
   constructor(private http: HttpClient) { }
 
   getAllSession(): Observable<any>{
@@ -16,11 +17,15 @@ export class SessionService {
     getSessionById(id: number): Observable<any> {
       return this.http.get(`${this.baseUrl}/${id}`);
     }
-  
-    createSession(session: any): Observable<any> {
-      return this.http.post(`${this.baseUrl}`, session);
+
+    update(data :any): Observable<any>{
+      return this.http.post<any>(`${this.baseUrl}/update`, data);
     }
   
-    deleteSession(id: number): Observable<any> {
-      return this.http.delete(`${this.baseUrl}/${id}`);
+    create(data: any): Observable<any> {
+      return this.http.post<any>(`${this.baseUrl}/save`, data);
+    }
+  
+    delete(data: any): Observable<any> {
+      return this.http.delete<any>(`${this.baseUrl}${data}`);
     }}

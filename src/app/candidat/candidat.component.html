@@ -1,3 +1,5 @@
+<p-toast></p-toast>
+
 <div class="wrapper">
     <!-- ========== Left Sidebar Start ========== -->
     <app-sidebar></app-sidebar>
@@ -19,30 +21,118 @@
         <div class="container-fluid">
 
 
-            <p-table
-    [value]="customers"
-    [paginator]="true"
-    [rows]="5"
-    [tableStyle]="{ 'min-width': '50rem' }"
-    [rowsPerPageOptions]="[5, 10, 20]"
->
-    <ng-template pTemplate="header">
-        <tr>
-            <th style="width:25%">Name</th>
-            <th style="width:25%">Country</th>
-            <th style="width:25%">Company</th>
-            <th style="width:25%">Representative</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-customer>
-        <tr>
-            <td>{{ customer.name }}</td>
-            <td>{{ customer.country.name }}</td>
-            <td>{{ customer.company }}</td>
-            <td>{{ customer.representative.name }}</td>
-        </tr>
-    </ng-template>
-</p-table>
+
+            <br>
+            <br>
+            <br>
+
+            <div class="row mb-2">
+              <div class="col-sm-5">
+                  <button type="button" class="btn btn-primary mb-2" (click)="createCandidat()" >
+                      <i class="mdi mdi-plus-circle me-2"></i>   Ajouter un candidat
+                  </button>
+              </div>
+          </div>
+          
+
+
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+            
+                        <p-table #dt [rows]="4" [loading]="loading" [rowHover]="true" [paginator]="true" [value]="candidatList" sortMode="multiple"
+                        responsiveLayout="scroll"
+                        [resizableColumns]="true"
+                        [responsive]="true"
+                        currentPageReportTemplate="affiche {first} à {last} sur {totalRecords} entrées"
+                        [showCurrentPageReport]="true"
+                        [globalFilterFields]="['nom','prenom', 'matricule', 'sexe', 'moyenneBacProb', 'age', 'observations', 'session']"
+                        >
+                        <ng-template pTemplate="caption">
+                          <div class="d-flex p-ai-center justify-content-between">
+                            <h5 class="p-m-0">Gestion des Candidats</h5>
+                            <span class="p-input-icon-left">
+                              <i class="pi pi-search"></i>
+                               <input pInputText [(ngModel)]="search" (input)="dt.filterGlobal(search, 'contains')" type="text" class="form-control" style="padding-left: 30px;"
+                                placeholder="Rechercher un candidat..." /> 
+
+                                
+                            </span>
+                          </div>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                          <tr>
+                            <th style="width: 3rem">
+                              <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                            </th>
+                            <th pSortableColumn="nom">Nom <p-sortIcon field="nom"></p-sortIcon>
+                            <th pSortableColumn="prenom">Prénom <p-sortIcon field="prenom"></p-sortIcon>
+                                <th pSortableColumn="matricule">Matricule <p-sortIcon field="matricule"></p-sortIcon>
+                                    <th pSortableColumn="sexe">Sexe <p-sortIcon field="sexe"></p-sortIcon>
+                                          <th pSortableColumn="moyenneBacProb">Moyenne Baccalauréat ou Probatoire<p-sortIcon field="moyenneBacProb"></p-sortIcon>
+                                            <th pSortableColumn="age">Age<p-sortIcon field="age"></p-sortIcon>
+                                            <th pSortableColumn="observations">Observations<p-sortIcon field="observations"></p-sortIcon>                                     
+                                              <th pSortableColumn="session">Session <p-sortIcon field="session"></p-sortIcon>
+
+
+
+
+            
+                            
+                            <th>Actions</th>
+                          </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-dataItem>
+                          <tr>
+                            <td>
+                              <p-tableCheckbox [value]="dataItem"></p-tableCheckbox>
+                            </td>
+                            <td>{{dataItem.nom}}</td>
+                            <td>{{dataItem.prenom}}</td>
+                            <td>{{dataItem.matricule}}</td>
+                            <td>{{dataItem.sexe}}</td>
+                            <td>{{dataItem.moyenneBacProb}}</td>
+                            <td>{{dataItem.age}}</td>
+                            <td>{{dataItem.observations}}</td>
+                            <td>{{dataItem.session.libelle}}</td> 
+                            
+
+
+            
+                             <td>
+                              <!-- <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-info mr-2"
+                              (click)="editSession(dataItem, $event)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger"
+                                (click)="dropSession(dataItem.code, dataItem.libelle)"></button> -->
+                            </td> 
+                          </tr>
+                        </ng-template>
+                      <ng-template pTemplate="footer">
+                        <div class="d-flex align-items-center justify-content-between">
+                          Il y a au total {{ candidatList ? candidatList.length : 0 }} Candidats(s).
+                        </div>
+                      </ng-template>
+            
+                </p-table>
+
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+            
+                    </div> <!-- end card body-->
+                </div> <!-- end card -->
+            </div>
   
           <!-- start page title -->
   
@@ -56,7 +146,7 @@
       <!-- content -->
   
       <!-- Footer Start -->
-      <app-footer-activity></app-footer-activity>    <!-- end Footer -->
+         <!-- end Footer -->
   
     </div>
   
@@ -66,4 +156,66 @@
   
   
   </div>
+
+
+
+  
+  <p-dialog [style]="{width: '750px'}" [header]="isUpdating == true ? 'Modifier le candidat': 'Ajouter un candidat'" [(visible)]="candidatDialog" [modal]="true"
+  [maximizable]="true" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+ 
+  <form [formGroup]="candidatForm" (ngSubmit)="saveCandi($event)">
+    <div class="form-group">
+        <label for="recipient-name" class="col-form-label"> Nom</label>
+        <input type="text" class="form-control" formControlName="nom" [(ngModel)]="this.Candidat.nom"  id="nom" required>
+    </div>
+
+    <div class="form-group">
+        <label for="recipient-name" class="col-form-label"> Prénom:</label>
+        <input type="text" class="form-control" formControlName="prenom"  [(ngModel)]="this.Candidat.prenom"   id="prenom" required>
+    </div>
+
+    <div class="form-group">
+        <label for="recipient-name" class="col-form-label"> Matricule:</label>
+        <input type="text" class="form-control" formControlName="matricule"  [(ngModel)]="this.Candidat.matricule"   id="matricule" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="recipient-name" class="col-form-label"> Sexe:</label>
+      <input type="text" class="form-control" formControlName="sexe"  [(ngModel)]="this.Candidat.sexe"   id="sexe" required>
+  </div>
+
+  <div class="form-group">
+    <label for="recipient-name" class="col-form-label"> Age:</label>
+    <input type="number" class="form-control" formControlName="age"  [(ngModel)]="this.Candidat.age"   id="age" required>
+</div>
+  
+  <div class="form-group">
+    <label for="recipient-name" class="col-form-label"> Moyenne Baccalauréat ou Probatoire:</label>
+    <input type="number" class="form-control" formControlName="moyenneBacProb"  [(ngModel)]="this.Candidat.moyenneBacProb"   id="moyenneBacProb" required>
+</div>
+<div class="form-group">
+  <label for="recipient-name" class="col-form-label"> Observations:</label>
+  <input type="text" class="form-control" formControlName="observations"  [(ngModel)]="this.Candidat.observations"   id="observations" required>
+</div>
+<div class="form-group">
+  <label for="recipient-name" class="col-form-label"> Choisir Une Session:</label>
+  <select class="form-control" formControlName="session"     name="session"  style="width: 100%" required [(ngModel)]="this.Candidat.session_id">
+    <option  *ngFor="let session of SessionList " value="{{session.code}}">{{session.libelle}}</option>
+
+
+  </select>
+</div>
+
+    <div class="d-flex mt-4 justify-content-center align-items-center ">
+      <button type="submit" [disabled]="candidatForm.invalid || senddingRequest" class="btn d-flex justify-content-center align-items-center btn-primary">
+        <span *ngIf="!senddingRequest">Enregister</span>
+        <div *ngIf="senddingRequest" class="spinner-border text-sucess" role="status">
+          <span class="sr-only"></span>
+        </div>
+      </button>
+      <button type="reset" [disabled]="senddingRequest || isUpdating" class="btn btn-light  btn_effacer" (click)="annuler()">Effacer</button>
+    </div>
+
+  </form>
+</p-dialog>
   

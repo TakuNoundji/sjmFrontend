@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,11 +9,13 @@ import { Observable } from 'rxjs';
 
 export class CandidatService {
 
-  private baseUrl = 'http://localhost:8086/api/sjm/candidat'
+   baseUrl = `${environment.api}candidat`;
 
   constructor(private http: HttpClient) { }
 
   getAllCandidat(): Observable<any>{
+    console.log(this.baseUrl);
+    
     return this.http.get(`${this.baseUrl}`); 
   }
 
@@ -20,12 +23,17 @@ export class CandidatService {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
 
-  createCandidat(candidat: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}`, candidat);
+  create(data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/save`, data);
   }
 
-  deleteCandidat(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`);
+  delete(data: any): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/${data}`);
+  }
+
+
+  update(data : any): Observable<any>{
+    return this.http.post<any>(`${this.baseUrl}/update`, data);
   }
 
 

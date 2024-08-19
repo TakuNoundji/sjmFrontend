@@ -6,6 +6,7 @@ import { SeanceComponent } from '../seance/seance.component';
 import { RubriqueComponent } from '../rubrique/rubrique.component';
 import { CandidatComponent } from '../candidat/candidat.component';
 import { AdminComponent } from './admin.component';
+import { OptimisationComponent } from '../optimisation/optimisation.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,8 @@ const routes: Routes = [
   {path: 'session', component : SessionComponent},
   {path: 'rubrique', component : RubriqueComponent},
   {path: 'seance', component : SeanceComponent},
+  {path: 'optimisation', component : OptimisationComponent},
+
 
 ];
 

@@ -1,82 +1,92 @@
 <div class="leftside-menu" style="background: green">
 
     <!-- LOGO -->
-    <a  class="logo text-center logo-light">
-                          <span class="logo-lg">
-        <h2 style="font-weight: 700; color: green; padding-top: 30px"> <img src="assets/images/d.png" alt="" height="50" width="100%">
-        </h2>
-                          </span>
-      <span class="logo-sm" style="color: green;">
+    <a class="logo text-center logo-light">
+        <span class="logo-lg">
+            <h2 style="font-weight: 700; color: green; padding-top: 30px"> <img src="/assets/images/d.png" alt=""
+                    height="50" width="100%">
+            </h2>
+        </span>
+        <span class="logo-sm" style="color: green;">
 
-        <span class="text-danger">SJ</span>M
-                          </span>
+            <span class="text-danger">SJ</span>M
+        </span>
     </a>
-  
+
     <!-- LOGO -->
-    <a href="index.html" class="logo text-center logo-dark">
-                          <span class="logo-lg">
-                              <img src="assets/images/logo-dark.png" alt="" height="16">
-                          </span>
-      <span class="logo-sm">
-                              <img src="assets/images/logo_sm_dark.png" alt="" height="16">
-                          </span>
-    </a>
-  
-    <div class="h-100" id="leftside-menu-container" data-simplebar>
-  
-      <!--- Sidemenu -->
-      <ul class="side-nav">
+    <!-- <a href="index.html" class="logo text-center logo-dark">
+        <span class="logo-lg">
+            <img src="/assets/images/logo-dark.png" alt="" height="16">
+        </span>
+        <span class="logo-sm">
+            <img src="/assets/images/logo_sm_dark.png" alt="" height="16">
+        </span>
+    </a> -->
 
-        <br><br>
-        <br>
-  
-  
-        <li class="side-nav-item pt-3">
-          <a data-bs-toggle="collapse" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link" routerLinkActive="active"  [routerLink]="'/dashboard/candidat'">
-            <i class="bi bi-house-door"></i>
-            <span> Candidats  </span>
-          </a>
-        </li>
-        <li class="side-nav-item pt-3">
-            <a data-bs-toggle="collapse" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link" routerLinkActive="active"  [routerLink]="'/dashboard/rubrique'">
-              <i class="bi bi-house-door"></i>
-              <span> Rubriques  </span>
-            </a>
-          </li>
-          <li class="side-nav-item pt-3">
-            <a data-bs-toggle="collapse" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link" routerLinkActive="active"  [routerLink]="'/dashboard/seance'">
-              <i class="bi bi-house-door"></i>
-              <span> Séance  </span>
-            </a>
-          </li>
-          <li class="side-nav-item pt-3">
-            <a data-bs-toggle="collapse" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link" routerLinkActive="active"  [routerLink]="'/dashboard/session'">
-              <i class="bi bi-house-door"></i>
-              <span> Session  </span>
-            </a>
-          </li>
-   
-           <br><br> <br><br>
-                      <br><br> <br><br>
+    <div class="h-100" >
 
-  
-        <li class="side-nav-item" >
-          <a  href="#"  class="side-nav-link"  routerLinkActive="active"  [routerLink]="'/deconnexion'">
-            <i class="bi bi-box-arrow-right"></i>
-            <span> Se Déconnecter   </span>
-          </a>
-        </li>
-  
-  
-      </ul>
-  
-      <!-- Help Box -->
-      <!-- end Help Box -->
-      <!-- End Sidebar -->
-  
-  
+        <!--- Sidemenu -->
+        <ul class="side-nav">
+
+            <br><br>
+            <br>
+
+
+            <li class="side-nav-item pt-3">
+                <a class="side-nav-link" routerLinkActive="active" [routerLink]="'/dashboard/candidat'">
+                    <i class="bi bi-house-door"></i>
+                    <span> Gestion des candidats </span>
+                </a>
+            </li>
+            <li class="side-nav-item pt-3">
+                <a class="side-nav-link" routerLinkActive="active" [routerLink]="'/dashboard/rubrique'">
+                    <i class="bi bi-house-door"></i>
+                    <span> Gestion des rubriques </span>
+                </a>
+            </li>
+            <li class="side-nav-item pt-3">
+                <a class="side-nav-link" routerLinkActive="active" [routerLink]="'/dashboard/seance'">
+                    <i class="bi bi-house-door"></i>
+                    <span> Gestion des séances </span>
+                </a>
+            </li>
+            <li class="side-nav-item pt-3">
+                <a  class="side-nav-link" routerLinkActive="active" [routerLink]="'/dashboard/session'">
+                    <i class="bi bi-house-door"></i>
+                    <span> Gestion des sessions </span>
+                </a>
+            </li>
+
+            <li class="side-nav-item pt-3">
+                <a  class="side-nav-link" routerLinkActive="active" [routerLink]="'/dashboard/optimisation'">
+                    <i class="bi bi-house-door"></i>
+                    <span> Optimisation </span>
+                </a>
+            </li>
+
+
+            
+
+            <br><br> <br><br>
+            <br><br> <br><br>
+
+
+            <li class="side-nav-item">
+                <a  class="side-nav-link" routerLinkActive="active" [routerLink]="'/dashboard/deconnexion'">
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span> Se Déconnecter </span>
+                </a>
+            </li>
+
+
+        </ul>
+
+        <!-- Help Box -->
+        <!-- end Help Box -->
+        <!-- End Sidebar -->
+
+
     </div>
     <!-- Sidebar -left -->
-  
-  </div>
-  
+
+</div>

@@ -18,11 +18,15 @@ export class RubriqueService {
     getRubriqueById(id: number): Observable<any> {
       return this.http.get(`${this.baseUrl}/${id}`);
     }
-  
-    createRubrique(rubrique: any): Observable<any> {
-      return this.http.post(`${this.baseUrl}`, rubrique);
+
+    update(data: any): Observable<any>{
+      return this.http.post<any>(`${this.baseUrl}/update`, data);
     }
   
-    deleteRubrique(id: number): Observable<any> {
-      return this.http.delete(`${this.baseUrl}/${id}`);
+    create(data: any): Observable<any> {
+      return this.http.post<any>(`${this.baseUrl}/save`, data);
+    }
+  
+    delete(data: any): Observable<any> {
+      return this.http.delete<any>(`${this.baseUrl}${data}`);
     }}
