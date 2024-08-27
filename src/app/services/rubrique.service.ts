@@ -24,9 +24,9 @@ export class RubriqueService {
     }
   
     create(data: any): Observable<any> {
-      return this.http.post<any>(`${this.baseUrl}/save`, data);
+      return this.http.post(`${this.baseUrl}/save`, data);
     }
   
     delete(data: any): Observable<any> {
-      return this.http.delete<any>(`${this.baseUrl}${data}`);
+      return this.http.delete<any>(`${this.baseUrl}/${data}`);
     }}

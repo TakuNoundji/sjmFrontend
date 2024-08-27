@@ -15,11 +15,12 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { SessionService } from '../services/session.service';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @Component({
   selector: 'app-candidat',
   standalone: true,
-  imports: [TableModule,NgFor,DialogModule,FormsModule, SidebarComponent,ReactiveFormsModule, CommonModule, NgIf, HeaderActivityComponent,SlicePipe, FooterActivityComponent, ToastModule, RouterLink, RouterLinkActive],
+  imports: [TableModule,NgFor,DialogModule,FormsModule,ConfirmDialogModule, SidebarComponent,ReactiveFormsModule, CommonModule, NgIf, HeaderActivityComponent,SlicePipe, FooterActivityComponent, ToastModule, RouterLink, RouterLinkActive],
   templateUrl: './candidat.component.html',
   styleUrl: './candidat.component.css',
   providers: [CandidatService, MessageService, ConfirmationService]
@@ -58,7 +59,7 @@ Candidat = {
 
 annuler(): void{
   if (this.isUpdating === false) {
-    this.messageService.add({ severity: 'error', summary: 'erreur', detail: 'operation annuler', life: 3000 });
+    this.messageService.add({ severity: 'error', summary: 'erreur', detail: 'operation annuler', life: 5000 });
   }
   this.candidatDialog = false;
 }
@@ -133,10 +134,10 @@ candidatList=Array();
     this.senddingRequest = false;
     this.candidatDialog = false;
     this.messageService.add({
-      severity: 'success',
+      severity: 'succès',
       summary: 'Confirmer',
       detail: message,
-      life: 3000
+      life: 5000
     });
     this.Candidat = {
       code: '',
@@ -151,6 +152,23 @@ candidatList=Array();
       session_id : ''
     
     }
+  }
+
+  editCandidat(candidat: any, e: Event): void{
+    e.stopPropagation();
+  
+    // this.AcademicYear = academicYear;
+    this.Candidat.code = candidat.code;
+    this.Candidat.nom = candidat.nom;
+    this.Candidat.prenom = candidat.prenom;
+    this.Candidat.matricule = candidat.matricule;
+    this.Candidat.sexe = candidat.sexe;
+    this.Candidat.moyenneBacProb = candidat.moyenneBacProb;
+    this.Candidat.observations = candidat.observations;
+    this.Candidat.age = candidat.age;
+    this.isUpdating = true;
+    this.candidatDialog = true;
+    // console.log(this.AcademicYear);
   }
 
 
@@ -208,16 +226,16 @@ saveCandi(e: Event): void {
       // console.log(this.getCand());
       
       if(data != null){
-        this.resetRequestVariable("Ce candidat a été modifié avec success");
+        this.resetRequestVariable("Ce candidat a été modifié avec succès");
       }else{
-        this.messageService.add({ severity: 'error', summary: 'erreur', detail: "une erreur est survenue lors de la modification", life: 3000 });
+        this.messageService.add({ severity: 'error', summary: 'erreur', detail: "une erreur est survenue lors de la modification", life: 5000 });
       }
     },
     (res) => {
       this.senddingRequest = false;
       this.candidatDialog = false;
       // tslint:disable-next-line:max-line-length
-      this.messageService.add({ severity: 'error', summary: 'erreur', detail: 'erreur lors de la modification', life: 3000 });
+      this.messageService.add({ severity: 'error', summary: 'erreur', detail: 'erreur lors de la modification', life: 5000 });
     });
   }else{
     this.candidatService.create(cand).toPromise().then((data) => {
@@ -229,10 +247,10 @@ saveCandi(e: Event): void {
       
       if(data != null){
         // this.candidatList.push(data);
-        this.resetRequestVariable("candidat créé  avec success");
+        this.resetRequestVariable("candidat créé  avec succès");
         // this.getAllYears()
       }else{
-        this.messageService.add({ severity: 'error', summary: 'erreur', detail: "une erreur est survenue lors de la creation surement une probleme de date", life: 3000 });
+        this.messageService.add({ severity: 'error', summary: 'erreur', detail: "une erreur est survenue lors de la creation surement un problème de date", life: 5000 });
       }
     },
     (res) => {
@@ -240,7 +258,7 @@ saveCandi(e: Event): void {
       this.candidatDialog=false;
   this.candidatDialog = false;
       // tslint:disable-next-line:max-line-length
-      this.messageService.add({ severity: 'error', summary: 'erreur', detail: 'erreur lors de la creation', life: 3000 });
+      this.messageService.add({ severity: 'error', summary: 'erreur', detail: 'erreur lors de la creation', life: 5000 });
     });
   }
 
@@ -252,6 +270,36 @@ onSelectSession(e: Event):void{
 let values = e.target.value;
 // this.cand.session_id = values
 
+}
+
+dropCandidat(id: string, 	matricule:string): void{
+  this.confirmationService.confirm({
+    message: 'Etes vous sur de vouloir supprimer  ' + 	matricule + '? noter que ça suppression inplique la suppression de tout les données qui lui sont liées',
+    header: 'Confirm',
+    icon: 'pi pi-exclamation-triangle',
+    accept: () => {
+      this.isGettingAll = true;
+      this.candidatService.delete(id).toPromise().then((data) => {
+        this.isGettingAll = false;
+        console.log(data);
+        if(data != null){
+          this.messageService.add({ severity: 'error', summary: 'erreur', detail: data, life: 5000 });
+        }else{
+          // tslint:disable-next-line:max-line-length
+          this.messageService.add({ severity: 'succès', summary: 'succès', detail: `candidat N° ${id} supprimer avec succès`, life: 5000 });
+          // tslint:disable-next-line:triple-equals
+          this.candidatList = this.candidatList.filter( it  => it.code != id );
+        }
+      }, (res)=>{
+        this.isGettingAll = false
+        console.log(res);
+        this.messageService.add({ severity: 'error', summary: 'erreur', detail: res.error.error, life: 5000 });
+      });
+    },
+    reject: () => {
+      this.messageService.add({ severity: 'error', summary: 'erreur', detail: 'operation annuler', life: 5000 });
+    }
+  });
 }
 
 }

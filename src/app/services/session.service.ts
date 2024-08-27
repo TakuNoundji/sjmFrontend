@@ -27,5 +27,5 @@ export class SessionService {
     }
   
     delete(data: any): Observable<any> {
-      return this.http.delete<any>(`${this.baseUrl}${data}`);
+      return this.http.delete<any>(`${this.baseUrl}/${data}`);
     }}

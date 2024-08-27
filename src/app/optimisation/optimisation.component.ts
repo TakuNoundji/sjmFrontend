@@ -16,7 +16,7 @@ import { RubriqueService } from '../services/rubrique.service';
   imports: [HeaderActivityComponent, SidebarComponent, FooterActivityComponent, ToastModule, FormsModule, TableModule, SlicePipe,NgIf,DialogModule, CommonModule,   ReactiveFormsModule,],
   templateUrl: './optimisation.component.html',
   styleUrl: './optimisation.component.css',
-  providers: [RubriqueService, MessageService, ConfirmationService]
+  providers: [RubriqueService, MessageService, ConfirmationService,]
 
 })
 export class OptimisationComponent implements OnInit{
@@ -221,7 +221,7 @@ Rubrique = {
  // console.log(this.listWaza);
  
  console.log("le nombre de jury pour cette rubrique est ", Math.max(...this.simulationPlan(this.rubrique).map(x => x.jury)));
- console.log("le nombre de séance pour cette rubrique est ", Math.max(...this.simulationPlan(this.rubrique).map(x => x.seance)));
+ console.log("le nombre de séance pour cette rubrique est ", Math.max(...this.simulationPlan(this.rubrique).map(x => x.nbrseance)));
  console.log("le nombre de jury pour les jurys individuels est ", Math.max(...this.simulationPlan(this.rubrique).map(x => x.jury))*3);
 
 
@@ -283,10 +283,10 @@ listRubrique=[
   simulationPlan(rubrique:any){
 
     let numJury=1;
-    let hdebut="";
+    let debut="";
     let numseance=1;
     let nombreSeance = 0;
-    let hfin="";
+    let fin="";
     let newjury=true;
     let list_seance=[];
   
@@ -294,7 +294,7 @@ listRubrique=[
       
 
       if(list_seance.length>0){
-        if(this.compareDate(this.addtime(this.addtime(list_seance[list_seance.length-1].fin,rubrique.pause),rubrique.dureeDePassage) ,rubrique.heureDeFin)){
+        if(this.compareDate(this.addtime(this.addtime(list_seance[list_seance.length-1].hfin,rubrique.pause),rubrique.dureeDePassage) ,rubrique.heureDeFin)){
           newjury=true;
           numJury++;
           numseance=0;
@@ -312,18 +312,19 @@ listRubrique=[
       }
 
       if(newjury){
-        hdebut=rubrique.heureDeDebut;
+        debut=rubrique.heureDeDebut;
         newjury=false;
       }else{
-        hdebut = this.addtime(list_seance[list_seance.length-1].fin,rubrique.pause);
+        debut = this.addtime(list_seance[list_seance.length-1].hfin,rubrique.pause);
       }
 
-      hfin=this.addtime(hdebut,rubrique.dureeDePassage);
+      fin=this.addtime(debut,rubrique.dureeDePassage);
       list_seance.push({
-        debut:hdebut,
-        fin:hfin,
+        hdebut:debut,
+        hfin:fin,
         jury:numJury,
-        seance: numseance,
+        nbrseance: numseance,
+        codeRubrique : rubrique.code
       });
       
     

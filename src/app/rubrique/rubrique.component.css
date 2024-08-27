@@ -1,0 +1,10 @@
+button{
+    margin-left: 10px;
+    border-radius: 2.1rem;
+}
+
+
+.red-border {
+    border-color: red;  /* Change la couleur de la bordure en rouge */
+    color: red;         /* Change la couleur du texte en rouge */
+  }

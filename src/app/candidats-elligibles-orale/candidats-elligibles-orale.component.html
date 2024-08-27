@@ -26,14 +26,6 @@
             <br>
             <br>
 
-            <div class="row mb-2">
-              <div class="col-sm-5">
-                  <button type="button" class="btn btn-primary mb-2" (click)="createCandidat()" >
-                      <i class="mdi mdi-plus-circle me-2"></i>   Ajouter un candidat
-                  </button>
-              </div>
-          </div>
-          
 
 
             <div class="col-12">
@@ -50,7 +42,7 @@
                         >
                         <ng-template pTemplate="caption">
                           <div class="d-flex p-ai-center justify-content-between">
-                            <h5 class="p-m-0">Gestion des Candidats</h5>
+                            <h5 class="p-m-0">Liste des  Candidats elligibles aux examens oraux</h5>
                             <span class="p-input-icon-left">
                               <i class="pi pi-search"></i>
                                <input pInputText [(ngModel)]="search" (input)="dt.filterGlobal(search, 'contains')" type="text" class="form-control" style="padding-left: 30px;"
@@ -79,11 +71,10 @@
 
             
                             
-                            <th>Actions</th>
                           </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-dataItem>
-                          <tr>
+                          <tr *ngIf="dataItem.moyenneBacProb >= 14">
                             <td >
                               <p-tableCheckbox [value]="dataItem"></p-tableCheckbox>
                             </td>
@@ -96,20 +87,11 @@
                             <td>{{dataItem.observations}}</td>
                             <td>{{dataItem.session.libelle}}</td> 
                             
-
-
-            
-                             <td>
-                              <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-info mr-2"
-                              (click)="editCandidat(dataItem, $event)"></button>
-                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger"
-                                (click)="dropCandidat(dataItem.code, dataItem.matricule)"></button> 
-                            </td> 
                           </tr>
                         </ng-template>
                       <ng-template pTemplate="footer">
                         <div class="d-flex align-items-center justify-content-between">
-                          Il y a au total {{ candidatList ? candidatList.length : 0 }} Candidats(s).
+                          <!-- Il y a au total {{ candidatList ? candidatList.length : 0 }} Candidats(s). -->
                         </div>
                       </ng-template>
             
@@ -159,63 +141,4 @@
 
 
 
-  
-  <p-dialog [style]="{width: '750px'}" [header]="isUpdating == true ? 'Modifier le candidat': 'Ajouter un candidat'" [(visible)]="candidatDialog" [modal]="true"
-  [maximizable]="true" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
- 
-  <form [formGroup]="candidatForm" (ngSubmit)="saveCandi($event)">
-    <div class="form-group">
-        <label for="recipient-name" class="col-form-label"> Nom</label>
-        <input type="text" class="form-control" formControlName="nom" [(ngModel)]="this.Candidat.nom"  id="nom" required>
-    </div>
-
-    <div class="form-group">
-        <label for="recipient-name" class="col-form-label"> Prénom:</label>
-        <input type="text" class="form-control" formControlName="prenom"  [(ngModel)]="this.Candidat.prenom"   id="prenom" required>
-    </div>
-
-    <div class="form-group">
-        <label for="recipient-name" class="col-form-label"> Matricule:</label>
-        <input type="text" class="form-control" formControlName="matricule"  [(ngModel)]="this.Candidat.matricule"   id="matricule" required>
-    </div>
-    
-    <div class="form-group">
-      <label for="recipient-name" class="col-form-label"> Sexe:</label>
-      <input type="text" class="form-control" formControlName="sexe"  [(ngModel)]="this.Candidat.sexe"   id="sexe" required>
-  </div>
-
-  <div class="form-group">
-    <label for="recipient-name" class="col-form-label"> Age:</label>
-    <input type="number" class="form-control" formControlName="age"  [(ngModel)]="this.Candidat.age"   id="age" required>
-</div>
-  
-  <div class="form-group">
-    <label for="recipient-name" class="col-form-label"> Moyenne Baccalauréat ou Probatoire:</label>
-    <input type="number" class="form-control" formControlName="moyenneBacProb"  [(ngModel)]="this.Candidat.moyenneBacProb"   id="moyenneBacProb" required>
-</div>
-<div class="form-group">
-  <label for="recipient-name" class="col-form-label"> Observations:</label>
-  <input type="text" class="form-control" formControlName="observations"  [(ngModel)]="this.Candidat.observations"   id="observations" required>
-</div>
-<div class="form-group">
-  <label for="recipient-name" class="col-form-label"> Choisir Une Session:</label>
-  <select class="form-control" formControlName="session"     name="session"  style="width: 100%" required [(ngModel)]="this.Candidat.session_id">
-    <option  *ngFor="let session of SessionList " value="{{session.code}}">{{session.libelle}}</option>
-
-
-  </select>
-</div>
-
-    <div class="d-flex mt-4 justify-content-center align-items-center ">
-      <button type="submit" [disabled]="candidatForm.invalid || senddingRequest" class="btn d-flex justify-content-center align-items-center btn-primary">
-        <span *ngIf="!senddingRequest">Enregister</span>
-        <div *ngIf="senddingRequest" class="spinner-border text-sucess" role="status">
-          <span class="sr-only"></span>
-        </div>
-      </button>
-      <button type="reset" [disabled]="senddingRequest || isUpdating" class="btn btn-light  btn_effacer" (click)="annuler()">Effacer</button>
-    </div>
-
-  </form>
-</p-dialog>
 <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>   

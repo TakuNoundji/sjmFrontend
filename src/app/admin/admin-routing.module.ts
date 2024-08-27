@@ -7,6 +7,7 @@ import { RubriqueComponent } from '../rubrique/rubrique.component';
 import { CandidatComponent } from '../candidat/candidat.component';
 import { AdminComponent } from './admin.component';
 import { OptimisationComponent } from '../optimisation/optimisation.component';
+import { CandidatsElligiblesOraleComponent } from '../candidats-elligibles-orale/candidats-elligibles-orale.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,8 @@ const routes: Routes = [
   {path: 'rubrique', component : RubriqueComponent},
   {path: 'seance', component : SeanceComponent},
   {path: 'optimisation', component : OptimisationComponent},
+  {path: 'EOraux', component : CandidatsElligiblesOraleComponent},
+
 
 
 ];

@@ -4,20 +4,23 @@ import { HeaderActivityComponent } from '../header-activity/header-activity.comp
 import { FooterActivityComponent } from '../footer-activity/footer-activity.component';
 import { RubriqueService } from '../services/rubrique.service';
 import { TableModule } from 'primeng/table';
-import { CommonModule, NgIf, SlicePipe } from '@angular/common';
+import { CommonModule, NgClass, NgIf, SlicePipe } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ConfirmDialog } from 'primeng/confirmdialog';
+import { ConfirmDialog, ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { SeanceService } from '../services/seance.service';
 
 @Component({
   selector: 'app-rubrique',
   standalone: true,
-  imports: [SidebarComponent,ToastModule, HeaderActivityComponent, FooterActivityComponent, TableModule, SlicePipe,NgIf,DialogModule, CommonModule,   ReactiveFormsModule, FormsModule],
+  imports: [SidebarComponent,ToastModule, ConfirmDialogModule, HeaderActivityComponent, FooterActivityComponent, TableModule, SlicePipe,NgIf,DialogModule, CommonModule,   ReactiveFormsModule, FormsModule],
   templateUrl: './rubrique.component.html',
   styleUrl: './rubrique.component.css',
-  providers: [RubriqueService, MessageService, ConfirmationService]
+  providers: [RubriqueService, MessageService, ConfirmationService,SeanceService]
+
+
 })
 export class RubriqueComponent {
 
@@ -28,6 +31,11 @@ export class RubriqueComponent {
   isGettingAll = true;
   senddingRequest = false;
   isUpdating = false;
+
+  affiche = false;
+
+  seanceList = Array();
+
   
 
 
@@ -45,6 +53,8 @@ Rubrique = {
 
 
 };
+
+
 
 
 
@@ -73,6 +83,7 @@ rubriqueForm = this.formBuilder.group({
 
 
 
+
 });
 
   rubriqueList = Array();
@@ -82,9 +93,12 @@ rubriqueForm = this.formBuilder.group({
 
     private formBuilder : FormBuilder,
     private confirmationService : ConfirmationService,
-    private messageService : MessageService
+    private messageService : MessageService,
+    private seanceService : SeanceService,
   ){
     this.getRubrique();
+    this.getSea();
+
   }
 
 
@@ -136,7 +150,11 @@ saveRubri(e: Event): void {
 
 
 
+
   };
+
+  console.log(this.Rubrique);
+  
   // initiate the request
   this.senddingRequest = true;
 
@@ -160,6 +178,11 @@ saveRubri(e: Event): void {
     });
   }else{
     this.rubriqueService.create(rub).toPromise().then((data) => {
+
+      console.log(data);
+      console.log(rub);
+      
+      
       if(data != null){
         this.rubriqueList.push(data);
         this.resetRequestVariable("Rubrique de pack crée avec success");
@@ -179,9 +202,9 @@ saveRubri(e: Event): void {
 
 }
 
-dropRubrique(id: string, libelle:string): void{
+dropRubrique(id: string, nomDeLaRubrique:string): void{
   this.confirmationService.confirm({
-    message: 'Etes vous sur de vouloir supprimer  ' + libelle + '? noter que ça suppression inplique la supprission de tout les données qui lui sont liées',
+    message: 'Etes vous sur de vouloir supprimer  ' + nomDeLaRubrique + '? noter que ça suppression inplique la supprission de tout les données qui lui sont liées',
     header: 'Confirm',
     icon: 'pi pi-exclamation-triangle',
     accept: () => {
@@ -193,7 +216,7 @@ dropRubrique(id: string, libelle:string): void{
           this.messageService.add({ severity: 'error', summary: 'erreur', detail: data, life: 3000 });
         }else{
           // tslint:disable-next-line:max-line-length
-          this.messageService.add({ severity: 'success', summary: 'success', detail: `option de pack N° ${id} supprimer avec success`, life: 3000 });
+          this.messageService.add({ severity: 'success', summary: 'success', detail: `la Rubrique N° ${id} supprimée avec succès`, life: 3000 });
           // tslint:disable-next-line:triple-equals
           this.rubriqueList = this.rubriqueList.filter( it  => it.code != id );
         }
@@ -204,7 +227,7 @@ dropRubrique(id: string, libelle:string): void{
       });
     },
     reject: () => {
-      this.messageService.add({ severity: 'error', summary: 'erreur', detail: 'operation annuler', life: 3000 });
+      this.messageService.add({ severity: 'error', summary: 'erreur', detail: 'operation annulée', life: 3000 });
     }
   });
 }
@@ -229,6 +252,7 @@ resetRequestVariable(message: string): void{
     note: '',
       coefficient: '',
       noteEliminatoire: '',
+
   
   };
 }
@@ -251,6 +275,16 @@ editRubrique(rubrique: any, e: Event): void{
   this.isUpdating = true;
   this.rubriqueDialog = true;
   // console.log(this.AcademicYear);
+}
+
+
+getSea(): void{
+  this.seanceService.getAlSeance().toPromise().then((data) => {
+    this.seanceList = data;
+    console.log(data);
+    
+
+  })
 }
 
 

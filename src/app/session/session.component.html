@@ -81,12 +81,12 @@
                 <td>{{dataItem.mois| slice:0:25}}...</td>
 
                  <td>
-                  <button   class="btn btn-success mb-2"
+                  <button  pButton pRipple icon="pi pi-pencil" class="p-button p-button-info mr-2"
                   (click)="editSession(dataItem, $event)"></button>
-                    <button  type="button" class="btn btn mb-2" style="background-color: red;"
+                    <button  pButton pRipple icon="pi pi-trash" class="p-button p-button-danger"
                     (click)="dropSession(dataItem.code, dataItem.libelle)"></button>
                 </td> 
-              </tr>
+              </tr> 
             </ng-template>
           <ng-template pTemplate="footer">
             <div class="d-flex align-items-center justify-content-between">
@@ -155,7 +155,7 @@
 
   </form>
 </p-dialog>
- <!-- <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>   -->
+ <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>   
 
 
 

@@ -10,13 +10,13 @@ import { ConfirmationService, MessageService, PrimeIcons } from 'primeng/api';
 import { CommonModule, NgIf, SlicePipe } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Dialog, DialogModule } from 'primeng/dialog';
-import { ConfirmDialog } from 'primeng/confirmdialog';
+import { ConfirmDialog, ConfirmDialogModule } from 'primeng/confirmdialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-session',
   standalone: true,
-  imports: [TableModule,ToastModule, SidebarComponent, FooterActivityComponent, ActivityComponent, HeaderActivityComponent,NgIf, SlicePipe,DialogModule, CommonModule,   ReactiveFormsModule, FormsModule],
+  imports: [TableModule,ToastModule,ConfirmDialogModule, SidebarComponent, FooterActivityComponent, ActivityComponent, HeaderActivityComponent,NgIf, SlicePipe,DialogModule, CommonModule,   ReactiveFormsModule, FormsModule],
   templateUrl: './session.component.html',
   styleUrl: './session.component.css',
   providers: [SessionService, MessageService, ConfirmationService]
@@ -44,6 +44,8 @@ Session = {
   mois: ''
 
 };
+
+
 
 
 sessionForm = this.formBuilder.group({
@@ -124,7 +126,7 @@ sessionForm = this.formBuilder.group({
             this.messageService.add({ severity: 'error', summary: 'erreur', detail: data, life: 3000 });
           }else{
             // tslint:disable-next-line:max-line-length
-            this.messageService.add({ severity: 'success', summary: 'success', detail: `option de pack N° ${id} supprimer avec success`, life: 3000 });
+            this.messageService.add({ severity: 'success', summary: 'success', detail: ` Session supprimée avec success`, life: 3000 });
             // tslint:disable-next-line:triple-equals
             this.sessionList = this.sessionList.filter( it  => it.code != id );
           }

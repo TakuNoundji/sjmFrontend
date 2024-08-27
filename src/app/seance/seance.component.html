@@ -1,0 +1,213 @@
+<p-toast></p-toast>
+
+  <div class="wrapper">
+    <!-- ========== Left Sidebar Start ========== -->
+    <app-sidebar></app-sidebar>
+    <!-- Left Sidebar End -->
+  
+    <!-- ============================================================== -->
+    <!-- Start Page Content here -->
+    <!-- ============================================================== -->
+  
+    <div class="content-page">
+      <div class="content">
+        <!-- Topbar Start -->
+        <app-header-activity></app-header-activity>
+
+
+        <br>
+        <br>
+        <br><br>
+
+        
+        <!-- end Topbar -->
+  
+        <!-- Start Content-->
+        <div class="container-fluid">
+  
+          <!-- start page title -->
+
+          
+          <br>
+          <br>
+          <br>
+
+          <div class="row mb-2">
+            <div class="col-sm-5">
+                <button type="button" class="btn btn-primary mb-2" (click)="createSean()" >
+                    <i class="mdi mdi-plus-circle me-2"></i>   Ajouter un séance
+                </button>
+            </div>
+        </div>
+
+          
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+    
+                <p-table #dt [rows]="4" [loading]="loading" [rowHover]="true" [paginator]="true" [value]="seanceList" sortMode="multiple"
+                responsiveLayout="scroll"
+                [resizableColumns]="true"
+                [responsive]="true"
+                currentPageReportTemplate="affiche {first} à {last} sur {totalRecords} entrées"
+                [showCurrentPageReport]="true"
+                [globalFilterFields]="['hdebut','hfin', 'jury', 'nbrseance', 'rubrique']"
+                >
+                <ng-template pTemplate="caption">
+                  <div class="d-flex p-ai-center justify-content-between">
+                    <h5 class="p-m-0">Gestion des Séances</h5>
+                    <span class="p-input-icon-left">
+                      <i class="pi pi-search"></i>
+                      <!-- <input pInputText [(ngModel)]="search" (input)="dt.filterGlobal(search, 'contains')" type="text" class="form-control" style="padding-left: 30px;"
+                        placeholder="Rechercher un critere..." /> -->
+                    </span>
+                  </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th style="width: 3rem">
+                      <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
+                    <th pSortableColumn="hdebut">Heure de début<p-sortIcon field="hdebut"></p-sortIcon>
+                    <th pSortableColumn="hfin">Heure de fin <p-sortIcon field="hfin"></p-sortIcon>
+                        <th pSortableColumn="jury">Jury <p-sortIcon field="jury"></p-sortIcon>
+                            <th pSortableColumn="nbrseance">Nombre de séance <p-sortIcon field="nbrseance"></p-sortIcon>
+                           <th pSortableColumn="rubrique">Nom de la rubrique <p-sortIcon field="rubrique"></p-sortIcon> 
+
+
+
+
+    
+                    
+                    <th>Actions</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-dataItem>
+                  <tr>
+                    <td>
+                      <p-tableCheckbox [value]="dataItem"></p-tableCheckbox>
+                    </td>
+                    <td>{{dataItem.hdebut}}</td>
+                    <td>{{dataItem.hfin}}</td>
+                    <td>{{dataItem.jury}}</td>
+                    <td>{{dataItem.nbrseance}}</td>
+                    <td>{{dataItem.rubrique.noteEliminatoire}}</td> 
+
+
+
+                    <!-- <td>{{dataItem.heureDeFin}}</td> -->
+
+
+    
+                     <td>
+                      <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-info mr-2"
+                      (click)="editSeance(dataItem, $event)"></button>
+                        <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger"
+                        (click)="dropSeance(dataItem.code, dataItem.hdebut)"></button> 
+                    </td> 
+                  </tr>
+                </ng-template>
+              <ng-template pTemplate="footer">
+                <div class="d-flex align-items-center justify-content-between">
+                  Il y a au total {{ seanceList ? seanceList.length : 0 }} Séance(s).
+                </div>
+              </ng-template>
+    
+        </p-table>
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+    
+            </div> <!-- end card body-->
+        </div> <!-- end card -->
+    </div>
+
+
+
+
+          
+
+  
+  
+          <!-- end row -->
+  
+        </div>
+        <!-- container -->
+  
+      </div>
+      <!-- content -->
+  
+      <!-- Footer Start -->
+      <app-footer-activity></app-footer-activity>    <!-- end Footer -->
+  
+    </div>
+  
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
+  
+  
+  </div>
+
+  <p-dialog [style]="{width: '750px'}" [header]="isUpdating == true ? 'Modifier une séance': 'Ajouter une séance'" [(visible)]="seanceDialog" [modal]="true"
+  [maximizable]="true" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+ 
+  <form [formGroup]="seanceForm" (ngSubmit)="saveSean($event)">
+    <div class="form-group">
+        <label for="recipient-name" class="col-form-label"> Heure de début</label>
+        <input type="text" class="form-control" formControlName="hdebut" [(ngModel)]="this.Seance.hdebut"  id="hdebut" required>
+    </div>
+
+    <div class="form-group">
+        <label for="recipient-name" class="col-form-label"> Heure de fin:</label>
+        <input type="text" class="form-control" formControlName="hfin"  [(ngModel)]="this.Seance.hfin"   id="hfin" required>
+    </div>
+
+    <div class="form-group">
+        <label for="recipient-name" class="col-form-label"> Jury:</label>
+        <input type="number" class="form-control" formControlName="jury"  [(ngModel)]="this.Seance.jury"   id="jury" required>
+    </div>
+    <div class="form-group">
+      <label for="recipient-name" class="col-form-label"> Nombre de séance:</label>
+      <input type="number" class="form-control" formControlName="nbrseance"  [(ngModel)]="this.Seance.nbrseance"   id="nbrseance" required>
+  </div>
+
+<div class="form-group">
+  <label for="recipient-name" class="col-form-label"> Choisir Une Rubrique:</label>
+  <select class="form-control" formControlName="rubrique"     name="rubrique"  style="width: 100%" required [(ngModel)]="this.Seance.rubrique_id">
+    <option  *ngFor="let rubrique of rubriqueList " value="{{rubrique.code}}">{{rubrique.nomDeLaRubrique}}</option>
+
+
+  </select>
+</div> 
+
+
+
+
+
+
+    <div class="d-flex mt-4 justify-content-center align-items-center ">
+      <button type="submit"  class="btn d-flex justify-content-center align-items-center btn-primary">
+        <span *ngIf="!senddingRequest">Enregister</span>
+        <div *ngIf="senddingRequest" class="spinner-border text-sucess" role="status">
+          <span class="sr-only"></span>
+        </div>
+      </button>
+      <button type="reset" [disabled]="senddingRequest || isUpdating" class="btn btn-light  btn_effacer" (click)="annuler()">Effacer</button>
+    </div>
+
+  </form>
+</p-dialog>
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>   
