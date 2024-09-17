@@ -222,7 +222,7 @@ Rubrique = {
  
  console.log("le nombre de jury pour cette rubrique est ", Math.max(...this.simulationPlan(this.rubrique).map(x => x.jury)));
  console.log("le nombre de séance pour cette rubrique est ", Math.max(...this.simulationPlan(this.rubrique).map(x => x.nbrseance)));
- console.log("le nombre de jury pour les jurys individuels est ", Math.max(...this.simulationPlan(this.rubrique).map(x => x.jury))*3);
+ console.log("le nombre  jurys individuels est ", Math.max(...this.simulationPlan(this.rubrique).map(x => x.jury))*3);
 
 
 }
@@ -230,7 +230,7 @@ Rubrique = {
 nbcandidat=103;
 
 rubrique =  {
- nombreDeCandidatsParPassage: 1,
+ nombreDeCandidatsParPassage: 6,
  dureeDePassage: 15,
  pause: 5,
  heureDeDebut: "08h50",

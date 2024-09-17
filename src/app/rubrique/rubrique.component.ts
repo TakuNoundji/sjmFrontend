@@ -47,7 +47,7 @@ Rubrique = {
   heureDeDebut: '',
   heureDeFin: '',
   nomDeLaRubrique: '',
-  note: '',
+  // note: '',
   coefficient: '',
   noteEliminatoire: '',
 
@@ -73,7 +73,7 @@ rubriqueForm = this.formBuilder.group({
   heureDeDebut: new FormControl('', [Validators.required]),
   heureDeFin: new FormControl('', [Validators.required]),
   nomDeLaRubrique: new FormControl('', [Validators.required]),
-  note: new FormControl('', [Validators.required]),
+  // note: new FormControl('', [Validators.required]),
   coefficient: new FormControl('', [Validators.required]),
   noteEliminatoire: new FormControl('', [Validators.required]),
 
@@ -122,7 +122,7 @@ rubriqueForm = this.formBuilder.group({
       heureDeDebut: '',
       heureDeFin: '',
       nomDeLaRubrique: '',
-      note: '',
+      // note: '',
       coefficient: '',
       noteEliminatoire: '',
     
@@ -144,7 +144,7 @@ saveRubri(e: Event): void {
     heureDeDebut: this.Rubrique.heureDeDebut,
     heureDeFin: this.Rubrique.heureDeFin,
     nomDeLaRubrique: this.Rubrique.nomDeLaRubrique,
-    note: this.Rubrique.note,
+    // note: this.Rubrique.note,
     coefficient: this.Rubrique.coefficient,
     noteEliminatoire: this.Rubrique.noteEliminatoire,
 
@@ -165,7 +165,7 @@ saveRubri(e: Event): void {
     }).toPromise().then((data) => {
       this.getRubrique()
       if(data != null){
-        this.resetRequestVariable("Cette modifiée avec success");
+        this.resetRequestVariable("Cette rubrique a été modifiée avec succès");
       }else{
         this.messageService.add({ severity: 'error', summary: 'erreur', detail: "une erreur est survenue lors de la modification", life: 3000 });
       }
@@ -185,7 +185,7 @@ saveRubri(e: Event): void {
       
       if(data != null){
         this.rubriqueList.push(data);
-        this.resetRequestVariable("Rubrique de pack crée avec success");
+        this.resetRequestVariable("Rubrique  créée avec success");
         // this.getAllYears()
       }else{
         this.messageService.add({ severity: 'error', summary: 'erreur', detail: "une erreur est survenue lors de la creation surement une probleme de date", life: 3000 });
@@ -249,7 +249,7 @@ resetRequestVariable(message: string): void{
     heureDeDebut: '',
     heureDeFin: '',
     nomDeLaRubrique: '',
-    note: '',
+    // note: '',
       coefficient: '',
       noteEliminatoire: '',
 
@@ -269,7 +269,7 @@ editRubrique(rubrique: any, e: Event): void{
   this.Rubrique.heureDeDebut = rubrique.heureDeDebut;
   this.Rubrique.heureDeFin = rubrique.heureDeFin;
   this.Rubrique.nomDeLaRubrique = rubrique.nomDeLaRubrique;
-  this.Rubrique.note = rubrique.note;
+  // this.Rubrique.note = rubrique.note;
   this.Rubrique.coefficient = rubrique.coefficient;
   this.Rubrique.noteEliminatoire = rubrique.noteEliminatoire;
   this.isUpdating = true;

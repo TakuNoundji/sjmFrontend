@@ -46,7 +46,7 @@
                         [responsive]="true"
                         currentPageReportTemplate="affiche {first} à {last} sur {totalRecords} entrées"
                         [showCurrentPageReport]="true"
-                        [globalFilterFields]="['nom','prenom', 'matricule', 'sexe', 'moyenneBacProb', 'age', 'observations', 'session']"
+                        [globalFilterFields]="['nom','prenom', 'matricule', 'sexe', 'moyenneProbatoire', 'age', 'observations','mentionBaccFrancophone', 'gceA', 'session']"
                         >
                         <ng-template pTemplate="caption">
                           <div class="d-flex p-ai-center justify-content-between">
@@ -69,9 +69,11 @@
                             <th pSortableColumn="prenom">Prénom <p-sortIcon field="prenom"></p-sortIcon>
                                 <th pSortableColumn="matricule">Matricule <p-sortIcon field="matricule"></p-sortIcon>
                                     <th pSortableColumn="sexe">Sexe <p-sortIcon field="sexe"></p-sortIcon>
-                                          <th pSortableColumn="moyenneBacProb">Moyenne Baccalauréat ou Probatoire<p-sortIcon field="moyenneBacProb"></p-sortIcon>
+                                          <th pSortableColumn="moyenneProbatoire">Moyenne Probatoire<p-sortIcon field="moyenneProbatoire"></p-sortIcon>
                                             <th pSortableColumn="age">Age<p-sortIcon field="age"></p-sortIcon>
-                                            <th pSortableColumn="observations">Observations<p-sortIcon field="observations"></p-sortIcon>                                     
+                                            <th pSortableColumn="observations">Observations<p-sortIcon field="observations"></p-sortIcon>   
+                                              <th pSortableColumn="mentionBaccFrancophone">Mention Baccalauréat<p-sortIcon field="mentionBaccFrancophone"></p-sortIcon>                                     
+                                                <th pSortableColumn="gceA">Mention GCEA<p-sortIcon field="gceA"></p-sortIcon>                                     
                                               <th pSortableColumn="session">Session <p-sortIcon field="session"></p-sortIcon>
 
 
@@ -91,9 +93,11 @@
                             <td>{{dataItem.prenom}}</td>
                             <td>{{dataItem.matricule}}</td>
                             <td>{{dataItem.sexe}}</td>
-                            <td>{{dataItem.moyenneBacProb}}</td>
+                            <td>{{dataItem.moyenneProbatoire}}</td>
                             <td>{{dataItem.age}}</td>
                             <td>{{dataItem.observations}}</td>
+                            <td>{{dataItem.mentionBaccFrancophone}}</td>
+                            <td>{{dataItem.gceA}}</td>
                             <td>{{dataItem.session.libelle}}</td> 
                             
 
@@ -190,17 +194,25 @@
 </div>
   
   <div class="form-group">
-    <label for="recipient-name" class="col-form-label"> Moyenne Baccalauréat ou Probatoire:</label>
-    <input type="number" class="form-control" formControlName="moyenneBacProb"  [(ngModel)]="this.Candidat.moyenneBacProb"   id="moyenneBacProb" required>
+    <label for="recipient-name" class="col-form-label"> Moyenne Probatoire:</label>
+    <input type="number" class="form-control" formControlName="moyenneProbatoire"  [(ngModel)]="this.Candidat.moyenneProbatoire"   id="moyenneProbatoire" required>
 </div>
 <div class="form-group">
   <label for="recipient-name" class="col-form-label"> Observations:</label>
   <input type="text" class="form-control" formControlName="observations"  [(ngModel)]="this.Candidat.observations"   id="observations" required>
 </div>
 <div class="form-group">
+  <label for="recipient-name" class="col-form-label"> Mention Baccalauréat:</label>
+  <input type="text" class="form-control" formControlName="mentionBaccFrancophone"  [(ngModel)]="this.Candidat.mentionBaccFrancophone"   id="mentionBaccFrancophone" required>
+</div>
+<div class="form-group">
+  <label for="recipient-name" class="col-form-label"> Mention GCEA:</label>
+  <input type="text" class="form-control" formControlName="gceA"  [(ngModel)]="this.Candidat.gceA"   id="gceA" required>
+</div>
+<div class="form-group">
   <label for="recipient-name" class="col-form-label"> Choisir Une Session:</label>
   <select class="form-control" formControlName="session"     name="session"  style="width: 100%" required [(ngModel)]="this.Candidat.session_id">
-    <option  *ngFor="let session of SessionList " value="{{session.code}}">{{session.libelle}}</option>
+    <option  *ngFor="let session of SessionList " value="{{session.code}}">{{session.mois}}- {{session.annee}}</option>
 
 
   </select>

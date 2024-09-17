@@ -47,10 +47,11 @@ Candidat = {
   prenom: '',
   matricule: '',
   sexe: '',
-  moyenneBacProb: '',
+  moyenneProbatoire: '',
   observations: '',
   age: '',
-
+  mentionBaccFrancophone: '',
+  gceA: '',
   session_id : ''
 
 }
@@ -69,9 +70,11 @@ candidatForm = this.formBuilder.group({
   prenom: new FormControl('', [Validators.required]),
   matricule: new FormControl('', [Validators.required]),
   sexe: new FormControl('', [Validators.required]),
-  moyenneBacProb: new FormControl('', [Validators.required]),
+  moyenneProbatoire: new FormControl('', [Validators.required]),
   observations: new FormControl('', [Validators.required]),
   age: new FormControl('', [Validators.required]),
+  mentionBaccFrancophone: new FormControl('', [Validators.required]),
+  gceA: new FormControl('', [Validators.required]),
   session: new FormControl('', [Validators.required])
 
 
@@ -120,9 +123,11 @@ candidatList=Array();
       prenom: '',
       matricule: '',
       sexe: '',
-      moyenneBacProb: '',
+      moyenneProbatoire: '',
       observations: '',
       age: '',
+      mentionBaccFrancophone: '',
+      gceA: '',
     
       session_id : ''
     
@@ -134,7 +139,7 @@ candidatList=Array();
     this.senddingRequest = false;
     this.candidatDialog = false;
     this.messageService.add({
-      severity: 'succès',
+      severity: 'success',
       summary: 'Confirmer',
       detail: message,
       life: 5000
@@ -145,9 +150,11 @@ candidatList=Array();
       prenom: '',
       matricule: '',
       sexe: '',
-      moyenneBacProb: '',
+      moyenneProbatoire: '',
       observations: '',
       age: '',
+      mentionBaccFrancophone: '',
+      gceA: '',
     
       session_id : ''
     
@@ -163,9 +170,11 @@ candidatList=Array();
     this.Candidat.prenom = candidat.prenom;
     this.Candidat.matricule = candidat.matricule;
     this.Candidat.sexe = candidat.sexe;
-    this.Candidat.moyenneBacProb = candidat.moyenneBacProb;
-    this.Candidat.observations = candidat.observations;
+    this.Candidat.moyenneProbatoire = candidat.moyenneProbatoire;
     this.Candidat.age = candidat.age;
+    this.Candidat.mentionBaccFrancophone = candidat.mentionBaccFrancophone;
+    this.Candidat.observations = candidat.observations;
+    this.Candidat.gceA = candidat.gceA;
     this.isUpdating = true;
     this.candidatDialog = true;
     // console.log(this.AcademicYear);
@@ -202,8 +211,10 @@ saveCandi(e: Event): void {
     prenom: this.Candidat.prenom,
     matricule: this.Candidat.matricule,
     sexe: this.Candidat.sexe,
-    moyenneBacProb: this.Candidat.moyenneBacProb,
+    moyenneProbatoire: this.Candidat.moyenneProbatoire,
     observations: this.Candidat.observations,
+    mentionBaccFrancophone: this.Candidat.mentionBaccFrancophone,
+    gceA: this.Candidat.gceA,
     age: this.Candidat.age,
     session_id: this.Candidat.session_id,
 
@@ -286,7 +297,7 @@ dropCandidat(id: string, 	matricule:string): void{
           this.messageService.add({ severity: 'error', summary: 'erreur', detail: data, life: 5000 });
         }else{
           // tslint:disable-next-line:max-line-length
-          this.messageService.add({ severity: 'succès', summary: 'succès', detail: `candidat N° ${id} supprimer avec succès`, life: 5000 });
+          this.messageService.add({ severity: 'success', summary: 'success', detail: `candidat N° ${id} supprimer avec succès`, life: 5000 });
           // tslint:disable-next-line:triple-equals
           this.candidatList = this.candidatList.filter( it  => it.code != id );
         }

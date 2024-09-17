@@ -38,7 +38,7 @@
                         [responsive]="true"
                         currentPageReportTemplate="affiche {first} à {last} sur {totalRecords} entrées"
                         [showCurrentPageReport]="true"
-                        [globalFilterFields]="['nom','prenom', 'matricule', 'sexe', 'moyenneBacProb', 'age', 'observations', 'session']"
+                        [globalFilterFields]="['nom','prenom', 'matricule', 'sexe',  'moyenneProbatoire', 'age', 'observations','mentionBaccFrancophone', 'gceA', 'session']"
                         >
                         <ng-template pTemplate="caption">
                           <div class="d-flex p-ai-center justify-content-between">
@@ -61,10 +61,12 @@
                             <th pSortableColumn="prenom">Prénom <p-sortIcon field="prenom"></p-sortIcon>
                                 <th pSortableColumn="matricule">Matricule <p-sortIcon field="matricule"></p-sortIcon>
                                     <th pSortableColumn="sexe">Sexe <p-sortIcon field="sexe"></p-sortIcon>
-                                          <th pSortableColumn="moyenneBacProb">Moyenne Baccalauréat ou Probatoire<p-sortIcon field="moyenneBacProb"></p-sortIcon>
-                                            <th pSortableColumn="age">Age<p-sortIcon field="age"></p-sortIcon>
-                                            <th pSortableColumn="observations">Observations<p-sortIcon field="observations"></p-sortIcon>                                     
-                                              <th pSortableColumn="session">Session <p-sortIcon field="session"></p-sortIcon>
+                                      <th pSortableColumn="moyenneProbatoire">Moyenne Probatoire<p-sortIcon field="moyenneProbatoire"></p-sortIcon>
+                                        <th pSortableColumn="age">Age<p-sortIcon field="age"></p-sortIcon>
+                                        <th pSortableColumn="observations">Observations<p-sortIcon field="observations"></p-sortIcon>   
+                                          <th pSortableColumn="mentionBaccFrancophone">Mention Baccalauréat<p-sortIcon field="mentionBaccFrancophone"></p-sortIcon>                                     
+                                            <th pSortableColumn="gceA">Mention GCEA<p-sortIcon field="gceA"></p-sortIcon>                                     
+                                          <th pSortableColumn="session">Session <p-sortIcon field="session"></p-sortIcon>
 
 
 
@@ -74,7 +76,8 @@
                           </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-dataItem>
-                          <tr *ngIf="dataItem.moyenneBacProb >= 14">
+                          <tr *ngIf="dataItem.mentionBaccFrancophone === stringOne ",
+                       >
                             <td >
                               <p-tableCheckbox [value]="dataItem"></p-tableCheckbox>
                             </td>
@@ -82,9 +85,11 @@
                             <td>{{dataItem.prenom}}</td>
                             <td>{{dataItem.matricule}}</td>
                             <td>{{dataItem.sexe}}</td>
-                            <td>{{dataItem.moyenneBacProb}}</td>
+                            <td>{{dataItem.moyenneProbatoire}}</td>
                             <td>{{dataItem.age}}</td>
                             <td>{{dataItem.observations}}</td>
+                            <td>{{dataItem.mentionBaccFrancophone}}</td>
+                            <td>{{dataItem.gceA}}</td>
                             <td>{{dataItem.session.libelle}}</td> 
                             
                           </tr>

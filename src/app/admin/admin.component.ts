@@ -9,6 +9,7 @@ import { SessionService } from '../services/session.service';
 import { SeanceService } from '../services/seance.service';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TableModule } from 'primeng/table';
+import { NotesService } from '../services/notes.service';
 
 @Component({
   selector: 'app-admin',
@@ -16,7 +17,7 @@ import { TableModule } from 'primeng/table';
   imports: [SidebarComponent, HeaderActivityComponent, FooterActivityComponent,ActivityComponent, RouterLink, RouterLinkActive],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css',
-  providers: [CandidatService,RubriqueService,SessionService,SeanceService]
+  providers: [CandidatService,RubriqueService,SessionService,SeanceService, NotesService]
 })
 export class AdminComponent {
 
@@ -24,6 +25,8 @@ export class AdminComponent {
   rubriqueList = Array();
   sessionList= Array();
   seanceList = Array();
+  noteList = Array();
+
 
 
 
@@ -32,7 +35,8 @@ export class AdminComponent {
     private candidatService : CandidatService,
     private rubriqueService : RubriqueService,
     private sessionService : SessionService,
-    private seanceService : SeanceService
+    private seanceService : SeanceService,
+    private notesService : NotesService
   ){
     // this.customers;
 
@@ -40,6 +44,8 @@ export class AdminComponent {
     this.getRubrique();
     this.getSes();
     this.getSea();
+    this.getNote();
+
     
   }
 
@@ -57,6 +63,13 @@ export class AdminComponent {
   getRubrique(): void{
     this.rubriqueService.getAllRubrique().toPromise().then((data) => {
       this.rubriqueList =data;
+      console.log(data);
+      
+    })
+  }
+  getNote(): void{
+    this.notesService.getAllNotes().toPromise().then((data) => {
+      this.noteList =data;
       console.log(data);
       
     })

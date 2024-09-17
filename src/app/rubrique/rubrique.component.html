@@ -51,7 +51,7 @@
                     [responsive]="true"
                     currentPageReportTemplate="affiche {first} à {last} sur {totalRecords} entrées"
                     [showCurrentPageReport]="true"
-                    [globalFilterFields]="['nombreDeCandidatsParPassage','dureeDePassage', 'pause', 'heureDeDebut', 'heureDeFin','nomDeLaRubrique', 'note','coefficient', 'noteEliminatoire', 'seance_id']"
+                    [globalFilterFields]="['nombreDeCandidatsParPassage','dureeDePassage', 'pause', 'heureDeDebut', 'heureDeFin','nomDeLaRubrique', 'coefficient', 'noteEliminatoire']"
                     >
                     <ng-template pTemplate="caption">
                       <div class="d-flex p-ai-center justify-content-between">
@@ -76,7 +76,7 @@
                                     <th pSortableColumn="heureDeFin">Heure de fin <p-sortIcon field="heureDeFin"></p-sortIcon>
                                       <th pSortableColumn="nomDeLaRubrique">Nom de la rubrique <p-sortIcon field="nomDeLaRubrique"></p-sortIcon>
 
-                                      <th pSortableColumn="note">Note <p-sortIcon field="note"></p-sortIcon>
+                                      <!-- <th pSortableColumn="note">Note <p-sortIcon field="note"></p-sortIcon> -->
 
                                         <th pSortableColumn="coefficient">Coefficient<p-sortIcon field="coefficient"></p-sortIcon>
 
@@ -102,7 +102,7 @@
                         <td>{{dataItem.heureDeFin}}</td>
                         <td>{{dataItem.nomDeLaRubrique}}</td>
 
-                        <td >{{dataItem.note}}</td>
+                        <!-- <td >{{dataItem.note}}</td> -->
 
                         <td>{{dataItem.coefficient}}</td>
 
@@ -208,11 +208,11 @@
   <label for="recipient-name" class="col-form-label"> Nom de la rubrique:</label>
   <input type="text" class="form-control" formControlName="nomDeLaRubrique"  [(ngModel)]="this.Rubrique.nomDeLaRubrique"   id="nomDeLaRubrique" required>
 </div>
-
+<!-- 
 <div class="form-group" >
   <label for="recipient-name" class="col-form-label" > Note</label>
   <input type="number" class="form-control" formControlName="note"  [(ngModel)]="this.Rubrique.note"   id="note" required>
-</div>
+</div> -->
 
 <div class="form-group">
   <label for="recipient-name" class="col-form-label"> Coefficient</label>

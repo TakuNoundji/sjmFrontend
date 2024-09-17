@@ -28,6 +28,10 @@ export class CandidatsElligiblesOraleComponent {
   loading=false;
   search="";
 
+  stringOne: string = 'passable';
+  stringTwo: string = 'AAAA';
+
+
 
 
 
