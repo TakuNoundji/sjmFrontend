@@ -28,27 +28,27 @@
           <br>
           <br>
           <br>
-
+<!-- 
           <div class="row mb-2">
             <div class="col-sm-5">
                 <button type="button" class="btn btn-primary mb-2" (click)="createRub()" >
                     <i class="mdi mdi-plus-circle me-2"></i>   Ajouter une rubrique
                 </button>
             </div>
-        </div>
-
+        </div> -->
+<!-- 
         <div class="row mb-2">
             <div class="col-sm-5">
                 <button type="button" class="btn btn-primary mb-2"  >
                     <i class="mdi mdi-plus-circle me-2"></i>   Ajouter un candidat
                 </button>
             </div>
-        </div>
+        </div> -->
         
 
 
 
-
+<!-- 
           <div class="col-12">
             <div class="card">
                 <div class="card-body">
@@ -116,12 +116,6 @@
 
 
         
-                         <!-- <td>
-                          <button  class="btn btn-success mb-2"
-                          (click)="editRubrique(dataItem, $event)"></button>
-                            <button class="btn btn-primary mb-2" style="background-color: red;"
-                            (click)="dropRubrique(dataItem.code, dataItem.libelle)"></button> 
-                        </td>  -->
                       </tr>
                     </ng-template>
                   <ng-template pTemplate="footer">
@@ -149,7 +143,13 @@
         
                 </div> 
             </div> 
-        </div>
+        </div> -->
+
+
+        <!-- <p > le nombre de jury est de [nombreJuryIndividuel]</p>
+
+        <p > le nombre de jury est de </p> -->
+
 
 
         
@@ -157,20 +157,19 @@
             <div class="card">
                 <div class="card-body">
         
-                    <p-table #dt [rows]="4" [loading]="loading" [rowHover]="true" [paginator]="true" [value]="rubriqueList" sortMode="multiple"
+                    <p-table #dt [rows]="10" [loading]="loading" [rowHover]="true" [paginator]="true" [value]="listSeance" sortMode="multiple"
                     responsiveLayout="scroll"
                     [resizableColumns]="true"
                     [responsive]="true"
                     currentPageReportTemplate="affiche {first} à {last} sur {totalRecords} entrées"
                     [showCurrentPageReport]="true"
-                    [globalFilterFields]="['nombreDeCandidatsParPassage','dureeDePassage', 'pause', 'heureDeDebut', 'heureDeFin','nomDeLaRubrique', 'note','coefficient', 'noteEliminatoire']"
+                    [globalFilterFields]="['jury','hdebut', 'hfin', 'nbrseance']"
                     >
                     <ng-template pTemplate="caption">
                       <div class="d-flex p-ai-center justify-content-between">
-                        <h5 class="p-m-0">Gestion des Rubriques</h5>
+                        <h1 class="p-m-0">Optimisation</h1>
                         <span class="p-input-icon-left">
                           <i class="pi pi-search"></i>
-                          
                         </span>
                       </div>
                     </ng-template>
@@ -179,24 +178,15 @@
                         <th style="width: 3rem">
                           <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
-                        <th pSortableColumn="nombreDeCandidatsParPassage">Nombre de candidats par passage <p-sortIcon field="nombreDeCandidatsParPassage"></p-sortIcon>
-                        <th pSortableColumn="dureeDePassage">Durée de passage <p-sortIcon field="dureeDePassage"></p-sortIcon>
-                            <th pSortableColumn="pause">Pause <p-sortIcon field="pause"></p-sortIcon>
-                                <th pSortableColumn="heureDeDebut">Heure de début <p-sortIcon field="heureDeDebut"></p-sortIcon>
+                        <th pSortableColumn="jury">Numéro du jury <p-sortIcon field="jury"></p-sortIcon>
+                        <th pSortableColumn="hdebut">Heure de début <p-sortIcon field="hdebut"></p-sortIcon>
+                            <th pSortableColumn="hfin">Heure de fin <p-sortIcon field="hfin"></p-sortIcon>
+                                <th pSortableColumn="nbrseance">Numéro de séance <p-sortIcon field="nbrseance"></p-sortIcon>
 
-                                    <th pSortableColumn="heureDeFin">Heure de fin <p-sortIcon field="heureDeFin"></p-sortIcon>
-                                      <th pSortableColumn="nomDeLaRubrique">Nom de la rubrique <p-sortIcon field="nomDeLaRubrique"></p-sortIcon>
-
-                                      <th pSortableColumn="note">Note <p-sortIcon field="note"></p-sortIcon>
-
-                                        <th pSortableColumn="coefficient">Coefficient<p-sortIcon field="coefficient"></p-sortIcon>
-
-                                          <th pSortableColumn="noteEliminatoire">Note éliminatoire <p-sortIcon field="noteEliminatoire"></p-sortIcon>
 
 
         
                         
-                        <th>Actions</th>
                       </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-dataItem>
@@ -204,35 +194,23 @@
                         <td>
                           <p-tableCheckbox [value]="dataItem"></p-tableCheckbox>
                         </td>
-                        <td>{{dataItem.nombreDeCandidatsParPassage}}</td>
-                        <td>{{dataItem.dureeDePassage}}</td>
-                        <td>{{dataItem.pause}}</td>
-                        <td>{{dataItem.heureDeDebut}}</td>
-                        <td>{{dataItem.heureDeFin}}</td>
-                        <td>{{dataItem.nomDeLaRubrique}}</td>
-
-                        <td>{{dataItem.note}}</td>
-
-                        <td>{{dataItem.coefficient}}</td>
-
-                        <td>{{dataItem.noteEliminatoire}}</td>
+                        <td>{{dataItem.jury}}</td>
+                        <td>{{dataItem.hdebut}}</td>
+                        <td>{{dataItem.hfin}}</td>
+                        <td>{{dataItem.nbrseance}}</td>
 
 
 
         
-                         <!-- <td>
-                          <button  class="btn btn-success mb-2"
-                          (click)="editRubrique(dataItem, $event)"></button>
-                            <button class="btn btn-primary mb-2" style="background-color: red;"
-                            (click)="dropRubrique(dataItem.code, dataItem.libelle)"></button> 
-                        </td>  -->
                       </tr>
                     </ng-template>
                   <ng-template pTemplate="footer">
                     <div class="d-flex align-items-center justify-content-between">
-                      Il y a au total {{ rubriqueList ? rubriqueList.length : 0 }} Rubrique(s).
+                      Il y a au total {{ listSeance ? listSeance.length : 0 }} Séance(s).
+
                     </div>
                   </ng-template>
+
         
             </p-table>
 
@@ -241,27 +219,6 @@
             <br>
 
 
-            <h1>Optimisation</h1>
-
-
- <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Jury</th>
-      <th scope="col">Début</th>
-      <th scope="col">Fin</th>
-      <th scope="col">Séance</th>
-    </tr>
-  </thead>
-  <tbody>
-     <tr *ngFor="let seance of listSeance">
-      <th scope="row">{{ seance.jury }}</th>
-      <td>{{ seance.hdebut }}</td>
-      <td>{{ seance.hfin }}</td>
-      <td>{{ seance.nbrseance }}</td>
-    </tr> 
-  </tbody>
-</table>  
 
 
 
@@ -280,9 +237,30 @@
         
                 </div> 
             </div> 
-        </div>
+        </div> 
 
-  
+<!--   
+        <h1>Optimisation</h1>
+
+
+        <table class="table">
+         <thead>
+           <tr>
+             <th scope="col">Jury</th>
+             <th scope="col">Début</th>
+             <th scope="col">Fin</th>
+             <th scope="col">Séance</th>
+           </tr>
+         </thead>
+         <tbody>
+            <tr *ngFor="let seance of listSeance">
+             <th scope="row">{{ seance.jury }}</th>
+             <td>{{ seance.hdebut }}</td>
+             <td>{{ seance.hfin }}</td>
+             <td>{{ seance.nbrseance }}</td>
+           </tr> 
+         </tbody>
+       </table>   -->
   
           <!-- end row -->
   

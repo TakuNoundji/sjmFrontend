@@ -9,6 +9,8 @@ import { AdminComponent } from './admin.component';
 import { OptimisationComponent } from '../optimisation/optimisation.component';
 import { CandidatsElligiblesOraleComponent } from '../candidats-elligibles-orale/candidats-elligibles-orale.component';
 import { NotesComponent } from '../notes/notes.component';
+import { CandidatsEliminesComponent } from '../candidats-elimines/candidats-elimines.component';
+import { OrdonnancementComponent } from '../ordonnancement/ordonnancement.component';
 
 const routes: Routes = [
   {
@@ -25,6 +27,11 @@ const routes: Routes = [
   {path: 'optimisation', component : OptimisationComponent},
   {path: 'EOraux', component : CandidatsElligiblesOraleComponent},
   {path: 'notes', component : NotesComponent},
+  {path: 'candidatsElimines', component : CandidatsEliminesComponent},
+  {path: 'ordonnancement', component : OrdonnancementComponent},
+
+
+
 
 
 

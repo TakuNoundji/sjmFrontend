@@ -55,11 +55,11 @@
                 >
                 <ng-template pTemplate="caption">
                   <div class="d-flex p-ai-center justify-content-between">
-                    <h5 class="p-m-0">Gestion des Séances</h5>
+                    <h1 class="p-m-0">Gestion des Séances</h1>
                     <span class="p-input-icon-left">
                       <i class="pi pi-search"></i>
-                      <!-- <input pInputText [(ngModel)]="search" (input)="dt.filterGlobal(search, 'contains')" type="text" class="form-control" style="padding-left: 30px;"
-                        placeholder="Rechercher un critere..." /> -->
+                      <input pInputText [(ngModel)]="search" (input)="dt.filterGlobal(search, 'contains')" type="text" class="form-control" style="padding-left: 30px;"
+                        placeholder="Rechercher une séance..." /> 
                     </span>
                   </div>
                 </ng-template>
@@ -91,7 +91,7 @@
                     <td>{{dataItem.hfin}}</td>
                     <td>{{dataItem.jury}}</td>
                     <td>{{dataItem.nbrseance}}</td>
-                    <td>{{dataItem.rubrique.noteEliminatoire}}</td> 
+                    <td>{{dataItem.rubrique.nomDeLaRubrique}}</td> 
 
 
 
@@ -199,7 +199,7 @@
 
 
     <div class="d-flex mt-4 justify-content-center align-items-center ">
-      <button type="submit"  class="btn d-flex justify-content-center align-items-center btn-primary">
+      <button type="submit" [disabled]="seanceForm.invalid || senddingRequest" class="btn d-flex justify-content-center align-items-center btn-primary">
         <span *ngIf="!senddingRequest">Enregister</span>
         <div *ngIf="senddingRequest" class="spinner-border text-sucess" role="status">
           <span class="sr-only"></span>

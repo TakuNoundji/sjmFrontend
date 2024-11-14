@@ -29,6 +29,8 @@ export class OptimisationComponent implements OnInit{
   senddingRequest = false;
   isUpdating = false;
 
+   wazawa = 14
+
   
 Rubrique = {
   code: '',
@@ -209,7 +211,12 @@ Rubrique = {
   listSeance: any=[];
 
 
+  
+
+
   ngOnInit(): void {
+
+    var cn = 14;
     
 
     console.log("bonjour");
@@ -219,13 +226,24 @@ Rubrique = {
  console.log(this.simulationPlan(this.rubrique));
  this.listSeance=this.simulationPlan(this.rubrique);
  // console.log(this.listWaza);
- 
- console.log("le nombre de jury pour cette rubrique est ", Math.max(...this.simulationPlan(this.rubrique).map(x => x.jury)));
- console.log("le nombre de séance pour cette rubrique est ", Math.max(...this.simulationPlan(this.rubrique).map(x => x.nbrseance)));
- console.log("le nombre  jurys individuels est ", Math.max(...this.simulationPlan(this.rubrique).map(x => x.jury))*3);
+
+  var nombreJury =  Math.max(...this.simulationPlan(this.rubrique).map(x => x.jury))
+  var nombreSeance =  Math.max(...this.simulationPlan(this.rubrique).map(x => x.nbrseance))
+  var nombreJuryIndividuel = Math.max(...this.simulationPlan(this.rubrique).map(x => x.jury))*3
+ console.log("le nombre de jury pour cette rubrique est ", +nombreJury);
+//  console.log("le nombre de jury pour cette rubrique est ", Math.max(...this.simulationPlan(this.rubrique).map(x => x.jury)));
+
+//  console.log("le nombre de séance pour cette rubrique est ", Math.max(...this.simulationPlan(this.rubrique).map(x => x.nbrseance)));
+ console.log("le nombre de séance pour cette rubrique est ", +nombreSeance);
+
+//  console.log("le nombre  jurys individuels est ", Math.max(...this.simulationPlan(this.rubrique).map(x => x.jury))*3);
+ console.log("le nombre  jurys individuels est ",+nombreJuryIndividuel);
+
 
 
 }
+
+
 
 nbcandidat=103;
 

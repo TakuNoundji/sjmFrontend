@@ -204,7 +204,7 @@ saveNote(e: Event): void {
       
       
       if(data != null){
-        // this.candidatList.push(data);
+         this.noteList.push(data);
         this.resetRequestVariable("Note créée  avec succès");
         // this.getAllYears()
       }else{

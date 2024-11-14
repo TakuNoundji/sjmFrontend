@@ -8,3 +8,15 @@ button{
     border-color: red;  /* Change la couleur de la bordure en rouge */
     color: red;         /* Change la couleur du texte en rouge */
   }
+
+  h1{
+    font-style: oblique;
+
+    justify-content: center;
+
+    margin-left: auto;
+    margin-right: auto;
+    color: green;
+
+
+}

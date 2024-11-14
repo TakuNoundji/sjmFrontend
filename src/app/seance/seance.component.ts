@@ -180,7 +180,7 @@ export class SeanceComponent {
         // console.log(this.getCand());
         
         if(data != null){
-          this.resetRequestVariable("Ce candidat a été modifié avec success");
+          this.resetRequestVariable("Cette séance a été modifiée avec succès");
         }else{
           this.messageService.add({ severity: 'error', summary: 'erreur', detail: "une erreur est survenue lors de la modification", life: 3000 });
         }
@@ -200,8 +200,8 @@ export class SeanceComponent {
         
         
         if(data != null){
-          // this.candidatList.push(data);
-          this.resetRequestVariable("candidat créé  avec success");
+           this.seanceList.push(data);
+          this.resetRequestVariable("Séance créée  avec succès");
           // this.getAllYears()
         }else{
           this.messageService.add({ severity: 'error', summary: 'erreur', detail: "une erreur est survenue lors de la creation surement une probleme de date", life: 3000 });

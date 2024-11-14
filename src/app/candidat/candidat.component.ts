@@ -237,6 +237,8 @@ saveCandi(e: Event): void {
       // console.log(this.getCand());
       
       if(data != null){
+        this.candidatList.push(data);
+
         this.resetRequestVariable("Ce candidat a été modifié avec succès");
       }else{
         this.messageService.add({ severity: 'error', summary: 'erreur', detail: "une erreur est survenue lors de la modification", life: 5000 });

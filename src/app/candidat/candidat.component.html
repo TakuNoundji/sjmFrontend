@@ -50,7 +50,7 @@
                         >
                         <ng-template pTemplate="caption">
                           <div class="d-flex p-ai-center justify-content-between">
-                            <h5 class="p-m-0">Gestion des Candidats</h5>
+                            <h1 class="p-m-0">Gestion des Candidats</h1>
                             <span class="p-input-icon-left">
                               <i class="pi pi-search"></i>
                                <input pInputText [(ngModel)]="search" (input)="dt.filterGlobal(search, 'contains')" type="text" class="form-control" style="padding-left: 30px;"
@@ -98,7 +98,7 @@
                             <td>{{dataItem.observations}}</td>
                             <td>{{dataItem.mentionBaccFrancophone}}</td>
                             <td>{{dataItem.gceA}}</td>
-                            <td>{{dataItem.session.libelle}}</td> 
+                            <td>{{dataItem.session.mois}}-{{dataItem.session.annee}} </td> 
                             
 
 
@@ -150,6 +150,8 @@
       <!-- content -->
   
       <!-- Footer Start -->
+      <app-footer-activity></app-footer-activity>    <!-- end Footer -->
+
          <!-- end Footer -->
   
     </div>
@@ -231,3 +233,22 @@
   </form>
 </p-dialog>
 <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>   
+
+
+<script>
+
+document.getElementById('searchInput').addEventListener('keyup', function () {
+  const filterText = this.value.toLowerCase();
+  const items = document.querySelectorAll('#itemList li');
+
+  items.forEach(item => {
+    const text = item.textContent.toLowerCase();
+    if (text.includes(filterText)) {
+      item.style.display = '';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+});
+
+</script>

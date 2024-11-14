@@ -42,7 +42,7 @@
                         >
                         <ng-template pTemplate="caption">
                           <div class="d-flex p-ai-center justify-content-between">
-                            <h1 class="p-m-0">Liste des  Candidats elligibles aux examens oraux</h1>
+                            <h1 class="p-m-0">Liste des  candidats éliminés</h1>
                             <span class="p-input-icon-left">
                               <i class="pi pi-search"></i>
                                <input pInputText [(ngModel)]="search" (input)="dt.filterGlobal(search, 'contains')" type="text" class="form-control" style="padding-left: 30px;"
@@ -72,11 +72,12 @@
 
 
             
-                            
+                                            <th>Actions</th>
+
                           </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-dataItem>
-                          <tr *ngIf="dataItem.mentionBaccFrancophone === stringOne "
+                          <tr *ngIf="dataItem.age  >= 21 "
                        >
                             <td >
                               <p-tableCheckbox [value]="dataItem"></p-tableCheckbox>
@@ -91,6 +92,13 @@
                             <td>{{dataItem.mentionBaccFrancophone}}</td>
                             <td>{{dataItem.gceA}}</td>
                             <td>{{dataItem.session.libelle}}</td> 
+
+                            <td>
+                              <!-- <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-info mr-2"
+                              (click)="editCandidat(dataItem, $event)"></button> -->
+                                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger"
+                                (click)="dropCandidat(dataItem.code, dataItem.matricule)"></button> 
+                            </td> 
                             
                           </tr>
                         </ng-template>
